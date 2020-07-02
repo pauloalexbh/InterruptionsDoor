@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
  
 import Rpi.GPIO as gpio
-from datetime import datetime
+from datetime import datetime, timedelta
 import time
 
  
@@ -14,15 +14,17 @@ string PortaEstado = "ND"
  
 """ Funcoes """
 def action_event_button(gpio_pin):{
-  if gpio.input(Porta) == 0:
-   PortaEstado = "aberta";
+ if gpio.input(Porta) == 0:
+  PortaEstado = "aberta";
  else:
-   PortaEstado = "fechada";
- 
+  PortaEstado = "fechada";
+# if datetime.now()>PortaEvento:#esta aqui so para lembrar de como é a comparacao de datetime
+# if PortaEvento<(datetime.now()+timedelta(seconds=1)):#nao se pode comparar datetime com timedelta, mas pode-se somar.
  PortaEvento = datetime.now()
  #datahora = datetime.now()
- print "Houve um evento na porta (pino %d) e agora ela está %s "\n" % gpio_pin, %PortaEstado
+ print "Houve um evento na porta (pino %d) e agora ela está %s \n" % gpio_pin, %PortaEstado
  print (datahora)
+ 
 }
  
 """ Configurando GPIO """
