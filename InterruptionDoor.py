@@ -12,7 +12,7 @@ Porta=23
 PortaEvento = datetime.now()
 string PortaEstado = "ND"
 
-Tranca=23
+Tranca=24
 TrancaEvento = datetime.now()
 string TrancaEstado = "ND"
  
@@ -29,9 +29,9 @@ string TrancaEstado = "ND"
    #datahora = datetime.now()
    print "Houve um evento na porta (pino %d) e agora ela está %s \n" % gpio_pin, %PortaEstado
    print (PortaEvento)
-   }
+  }
    
-   if gpio_pin == Tranca:{
+  if gpio_pin == Tranca:{
    if gpio.input(gpio_pin) == 0:
     TrancaEstado = "aberta";
    else:
@@ -42,7 +42,7 @@ string TrancaEstado = "ND"
    #datahora = datetime.now()
    print "Houve um evento na tranca (pino %d) e agora ela está %s \n" % gpio_pin, %PortaEstado
    print (TrancaEvento)
-   } 
+  } 
  }
  
  def action_event_button(gpio_pin):{
@@ -61,14 +61,14 @@ string TrancaEstado = "ND"
   }
   if TrancaEstado == "aberta":{
    if PortaEstado == "fechada":{
-    if ((datetime.now()-timedelta(milliseconds=500))>PortaEvento)and((datetime.now()-timedelta(milliseconds=500))>TrancaEvento):{
+    if ((datetime.now()-timedelta(milliseconds=900))>PortaEvento)and((datetime.now()-timedelta(milliseconds=900))>TrancaEvento):{
     #A porta foi fechada sem ser trancada depois de meio segundo. Não fazer nada.
      print "\nA porta foi fechada sem ser trancada depois de meio segundo. Não fazer nada."
     }
     #E necessario esperar para saber se a porta sera trancada. Entao nao deve ter else
    }
    if PortaEstado == "aberta":{
-    if ((datetime.now()-timedelta(milliseconds=500))>TrancaEvento):{
+    if ((datetime.now()-timedelta(milliseconds=500))<TrancaEvento):{
      #A tranca estava aberta a tempo e a porta foi aberta. Não fazer nada.
      print "\nA tranca estava aberta a tempo e a porta foi aberta. Não fazer nada."
     }
